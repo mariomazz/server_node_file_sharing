@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "sh scripts/build.sh && ENV=dev node dist/index.js",
-    "serve:prod": "sh scripts/build.sh && ENV=prod node dist/index.js",
-    "build": "sh scripts/build.sh",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "serve:dev": "npx tsc && ENV=dev node dist/index.js",
+    "serve:prod": "npx tsc && ENV=prod node dist/index.js",
+    "serve:dev:watch": "concurrently \"npx tsc --watch\" \"ENV=dev nodemon -q dist/index.js\"",
+    "serve:prod:watch": "concurrently \"npx tsc --watch\" \"ENV=prod nodemon -q dist/index.js\"",
+    "host:dev": "npx tsc && ENV=dev pm2 start dist/index.js",
+    "host:dev:stop": "npx tsc && ENV=dev pm2 stop dist/index.js",
+    "host:prod": "npx tsc && ENV=prod pm2 start dist/index.js",
+    "host:prod:stop": "npx tsc && pm2 stop dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +22,9 @@
     "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
+    "concurrently": "^7.6.0",
     "eslint": "^8.31.0",
+    "nodemon": "^2.0.20",
     "typescript": "^4.9.4"
   },
   "dependencies": {

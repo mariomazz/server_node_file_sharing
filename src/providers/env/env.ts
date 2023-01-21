@@ -34,7 +34,7 @@ export class EnvManager {
 			const env = new Env();
 			const data = JSON.parse(
 				await fs.promises.readFile(
-					`/Users/mariomazzarelli/sviluppo/my_projects/file_sharing/server/env/${process.env.ENV}.json`,
+					`${process.cwd()}/env/${process.env.ENV}.json`,
 					{
 						encoding: "utf8",
 					}
