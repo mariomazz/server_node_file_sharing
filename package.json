@@ -11,8 +11,10 @@
     "serve:prod:watch": "concurrently \"npx tsc --watch\" \"ENV=prod nodemon -q dist/index.js\"",
     "host:dev": "npx tsc && ENV=dev pm2 start dist/index.js",
     "host:dev:stop": "npx tsc && ENV=dev pm2 stop dist/index.js",
+    "host:dev:restart": "npm run host:dev:stop && npm run host:dev",
     "host:prod": "npx tsc && ENV=prod pm2 start dist/index.js",
-    "host:prod:stop": "npx tsc && pm2 stop dist/index.js"
+    "host:prod:stop": "npx tsc && pm2 stop dist/index.js",
+    "host:prod:restart": "npm run host:prod:stop && npm run host:prod"
   },
   "keywords": [],
   "author": "",
