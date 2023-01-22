@@ -1,8 +1,8 @@
 import * as fs from "fs";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 
 export class FileManager {
-	saveFileFromByteArray(
+	writeFileAndCreateDirectory(
 		dir: string,
 		filename: string,
 		buffer: Buffer
@@ -11,27 +11,26 @@ export class FileManager {
 			if (dir[dir.length - 1] == "/") {
 				dir = dir.substring(0, dir.length - 1);
 			}
-			this.createDirectoryIfNotExists(dir).then(
-				() => {
+			this.createDirectory(dir).subscribe({
+				complete: () => {
 					dir = dir += `/${filename}`;
-					fs.writeFile(dir, buffer, function (err) {
-						if (err) {
-							observer.error(err);
-							observer.complete();
-						}
-						observer.next();
+					this.writeFile(dir, buffer).subscribe(() => {
 						observer.complete();
 					});
 				},
-				(err) => {
+				error: (err) => {
 					observer.error(err);
 					observer.complete();
-				}
-			);
+				},
+			});
 		});
 	}
 
-	async createDirectoryIfNotExists(dir: string): Promise<string> {
-		return await fs.promises.mkdir(dir, { recursive: true });
+	createDirectory(dir: string): Observable<string> {
+		return from(fs.promises.mkdir(dir, { recursive: true }));
+	}
+
+	writeFile(dir: string, buffer: Buffer): Observable<void> {
+		return from(fs.promises.writeFile(dir, buffer));
 	}
 }
