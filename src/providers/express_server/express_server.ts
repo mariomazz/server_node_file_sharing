@@ -29,7 +29,7 @@ export class ExpressServer {
 
 	private enableEndpoints() {
 		this.expressApp.get(Endpoints.main, (req, res) => {
-			res.send();
+			res.send("File Sharing Active");
 		});
 	}
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "serve:dev": "npx tsc && ENV=dev node dist/index.js",
-    "serve:prod": "ENV=prod node dist/index.js",
+    "serve:prod": "npx tsc && ENV=prod node dist/index.js",
     "serve:dev:watch": "concurrently \"npx tsc --watch\" \"ENV=dev nodemon -q dist/index.js\"",
     "serve:prod:watch": "concurrently \"npx tsc --watch\" \"ENV=prod nodemon -q dist/index.js\"",
     "host:dev": "npx tsc && ENV=dev pm2 start dist/index.js",
