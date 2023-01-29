@@ -1,8 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-import * as http from "http";
 import { Endpoints } from "./endpoints";
 import { EnvManager } from "../env/env";
+import * as http from "http";
+import * as ip from "ip";
 
 export class ExpressServer {
 	private expressApp = express();
@@ -20,8 +21,9 @@ export class ExpressServer {
 	}
 	public activate(): void {
 		this.server.listen(this.port, () => {
+			const myIp = ip.address();
 			return console.log(
-				`Express and Socket is listening at ${this.server.address().toString()}:${this.port}`
+				`Express and Socket is listening at ${myIp}:${this.port}`
 			);
 		});
 		this.enableEndpoints();
