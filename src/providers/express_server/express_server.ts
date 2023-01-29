@@ -6,7 +6,7 @@ import { EnvManager } from "../env/env";
 
 export class ExpressServer {
 	private expressApp = express();
-	private port = EnvManager.getEnv.server.port;
+	private port = process.env.PORT || EnvManager.getEnv.server.port;
 	server: http.Server;
 	private rawJsonOptions = {
 		inflate: true,
