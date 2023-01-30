@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import { Endpoints } from "./endpoints";
 import { EnvManager } from "../env/env";
 import * as http from "http";
-import * as ip from "ip";
 
 export class ExpressServer {
 	private expressApp = express();
