@@ -21,9 +21,9 @@ export class ExpressServer {
 	}
 	public activate(): void {
 		this.server.listen(this.port, () => {
-			const myIp = ip.address();
+			//const myIp = ip.address();
 			return console.log(
-				`Express and Socket is listening at ${myIp}:${this.port}`
+				`Express and Socket is listening at IP:${this.port}`
 			);
 		});
 		this.enableEndpoints();

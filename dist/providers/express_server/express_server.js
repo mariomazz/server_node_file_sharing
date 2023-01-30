@@ -32,7 +32,6 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const endpoints_1 = require("./endpoints");
 const env_1 = require("../env/env");
 const http = __importStar(require("http"));
-const ip = __importStar(require("ip"));
 class ExpressServer {
     constructor() {
         this.expressApp = (0, express_1.default)();
@@ -48,8 +47,8 @@ class ExpressServer {
     }
     activate() {
         this.server.listen(this.port, () => {
-            const myIp = ip.address();
-            return console.log(`Express and Socket is listening at ${myIp}:${this.port}`);
+            //const myIp = ip.address();
+            return console.log(`Express and Socket is listening at IP:${this.port}`);
         });
         this.enableEndpoints();
     }
