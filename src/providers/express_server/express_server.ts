@@ -21,9 +21,7 @@ export class ExpressServer {
 	public activate(): void {
 		this.server.listen(this.port, () => {
 			//const myIp = ip.address();
-			return console.log(
-				`Express and Socket is listening at IP:${this.port}`
-			);
+			return console.log(`Express and Socket is listening at IP:${this.port}`);
 		});
 		this.enableEndpoints();
 	}
@@ -31,6 +29,10 @@ export class ExpressServer {
 	private enableEndpoints() {
 		this.expressApp.get(Endpoints.main, (req, res) => {
 			res.send("File Sharing Active");
+		});
+		this.expressApp.get(Endpoints.findMyIp, (req, res) => {
+			const ip = req.ip;
+			res.send({ ip: ip });
 		});
 	}
 }
