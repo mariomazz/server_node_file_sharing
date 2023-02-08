@@ -30,9 +30,5 @@ export class ExpressServer {
 		this.expressApp.get(Endpoints.main, (req, res) => {
 			res.send("File Sharing Active");
 		});
-		this.expressApp.get(Endpoints.findMyIp, (req, res) => {
-			const ip = req.ip;
-			res.send({ ip: ip });
-		});
 	}
 }
